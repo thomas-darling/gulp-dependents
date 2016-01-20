@@ -1,0 +1,40 @@
+{
+  "name": "gulp-dependents",
+  "version": "1.0.0",
+  "description": "Gulp plugin that tracks dependencies between files and adds any files that depend on the files currently in the stream, thus enabling incremental build of less, scss, sass, with extensibility points to support other file types.",
+  "keywords": [
+    "gulp",
+    "incremental",
+    "dependencies",
+    "dependents",
+    "dependent",
+    "include",
+    "import",
+    "compile",
+    "build",
+    "less",
+    "sass",
+    "scss"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Thomas Darling",
+    "email": "mail@thda.dk"
+  },
+  "homepage": "https://github.com/thomas-darling/gulp-dependents",
+  "bugs": {
+    "url": "https://github.com/thomas-darling/gulp-dependents/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thomas-darling/gulp-dependents.git"
+  },
+  "dependencies": {
+    "gulp-util": "^3.0.7",
+    "through2": "^2.0.0"
+  },
+  "devDependencies": {
+    "gulp": "3.9.0"
+  },
+  "main": "dist/main.js"
+}

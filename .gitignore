@@ -1,0 +1,20 @@
+## Ignore files and folders created by the OS
+
+# Windows
+$RECYCLE.BIN/
+Thumbs.db
+
+# OSX
+.DS_STORE/
+
+## Ignore files and folders created by the IDE
+
+.vs/
+.ntvs_analysis.dat
+bin/
+obj/
+dist/
+
+## Ignore package folders
+
+node_modules/
