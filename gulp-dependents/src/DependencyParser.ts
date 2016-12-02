@@ -10,6 +10,14 @@ import DependencyParserConfig from "./DependencyParserConfig";
  */
 export const defaultConfig =
     {
+        ".pcss":
+        {
+            postfixes: [".pcss"],
+            parserSteps:
+            [
+                /(?:^|;|}|\*\/)\s*@import\s+(?:"([^"]+)"|'([^']+)'|url\((?:"([^"]+)"|'([^']+)'|([^)]+))\))/gm
+            ]
+        },
         ".less":
         {
             parserSteps:

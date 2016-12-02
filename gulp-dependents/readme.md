@@ -1,8 +1,9 @@
 ﻿gulp-dependents
 ===============
 Gulp plugin that tracks dependencies between files and adds any files that depend
-on the files currently in the stream, thus enabling incremental build of `less`,
-`scss` and `sass` files, with extensibility points to support other file types.
+on the files currently in the stream, thus enabling incremental build of `pcss`,
+`less`, `scss` and `sass` files, with extensibility points to support other file
+types.
 
 ## Problem
 Gulp makes it easy to build all your files, but as the code base grows, so does
@@ -18,8 +19,8 @@ and maintaining an in-memory dependency tree describing the dependencies between
 the files. For each file that passes through, it will add any files that directly
 or indirectly depend on that file to the stream, thus ensuring that they will also
 be rebuild. Combined with e.g. the [gulp-cached](https://www.npmjs.com/package/gulp-cached)
-or [gulp-changed](https://www.npmjs.com/package/gulp-changed) plugin, or the 
-"since last run" option in Gulp 4, this enables fast and reliable incremental builds.
+plugin, or the "since last run" option in Gulp 4, this enables fast and reliable
+incremental builds.
 
 ## Usage
 This example shows how the plugin may be used to watch and incrementally build
@@ -59,7 +60,7 @@ determine the initial dependency tree - it won't know a file depends on another,
 until it has parsed its dependency statements at least once.
 
 ## Support and limitations
-Out of the box, this plugin supports `less`, `scss` and `sass` files, including 
+Out of the box, this plugin supports `pcss`, `less`, `scss` and `sass` files, including 
 things like comma-separated path lists, import statements spanning multiple lines
 and `url(...)` paths. For `sass`, which is the indent-based variant of the `scss`
 syntax, support is limited to single-line statements. Also note, that due to the
@@ -100,10 +101,10 @@ var config = {
         parserSteps: [
 
             // PLEASE NOTE:
-            // The parser steps shown here are only meant as a simplified 
-            // example to illustrate the concept of the matching pipeline.
-            // The default config used for scss files is pure RegExp and 
-            // reliably supports the full syntax for import statements.
+            // The parser steps shown here are only meant as an example to 
+			// illustrate the concept of the matching pipeline.
+            // The default config used for scss files is pure RegExp and
+            // reliably supports the full syntax of scss import statements.
 
             // Match the import statements and capture the text 
             // between '@import' and ';'.
