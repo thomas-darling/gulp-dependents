@@ -1,6 +1,6 @@
 {
   "name": "gulp-dependents",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Gulp plugin that tracks dependencies between files and adds any files that depend on the files currently in the stream, thus enabling incremental build of pcss, less, scss, sass, with extensibility points to support other file types.",
   "keywords": [
     "gulp",
