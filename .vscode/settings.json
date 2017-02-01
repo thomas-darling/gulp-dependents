@@ -1,0 +1,18 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    // Configure glob patterns for excluding files and folders.
+    "files.exclude": {
+        ".vscode": true,
+        ".gitattributes": true,
+		".gitignore": true,
+        ".npmignore": true,
+        "lib": true,
+		"**/node_modules": true
+	},
+
+    // When enabled, will trim trailing whitespace when you save a file.
+    "files.trimTrailingWhitespace": true,
+
+    // Use the TypeScript version specified in package.json.
+    "typescript.tsdk": "./node_modules/typescript/lib"
+}

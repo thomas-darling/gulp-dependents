@@ -1,4 +1,4 @@
-import Plugin from "./src/Plugin";
+import Plugin from "./plugin/Plugin";
 
 // Export the plugin function that will be used in the gulp pipeline.
-export = Plugin.run;
+export = Plugin.create;

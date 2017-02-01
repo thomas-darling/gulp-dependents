@@ -5,7 +5,7 @@ import IDependencyParser from "./IDependencyParser";
 import DependencyParserConfig from "./DependencyParserConfig";
 
 /**
- * Represents the default configuration for the dependency tracker, specifying 
+ * Represents the default configuration for the dependency tracker, specifying
  * how dependencies should be parsed from each of the supported file types.
  */
 export const defaultConfig =
@@ -71,7 +71,7 @@ export default class DependencyParser implements IDependencyParser
     public config = {};
 
     /**
-     * Creates a new instance of the type. 
+     * Creates a new instance of the type.
      * @param config The configuration to merge with the default configuration.
      */
     constructor(config?: {})
@@ -101,7 +101,7 @@ export default class DependencyParser implements IDependencyParser
         }
 
         // Get the dependency paths specified in the file.
-        let dependencyPaths = this.parseFile(file, encoding, config);
+        let dependencyPaths = this.parseFile(file, config);
 
         // Ignore dependency paths representing URL's.
         dependencyPaths = dependencyPaths.filter(function (path)
@@ -111,7 +111,7 @@ export default class DependencyParser implements IDependencyParser
 
 
         // Add path variants for all prefix and postfix variants.
-        
+
         if (config.prefixes)
         {
             this.getPrefixedPathVariants(dependencyPaths, config)
@@ -127,6 +127,7 @@ export default class DependencyParser implements IDependencyParser
         if (config.basePaths)
         {
             this.getBasePathVariants(dependencyPaths, config)
+                .map(dependencyPath => path.resolve(path.dirname(file.base), dependencyPath))
                 .forEach(dependencyPath => dependencyPaths.push(dependencyPath));
         }
 
@@ -143,14 +144,13 @@ export default class DependencyParser implements IDependencyParser
      * Parses the specified file, returning the set of paths specified in its dependency statements.
      * Note that those are not yet valid file paths, as prefixes and postfixes may be missing.
      * @param file The file for which dependency paths should be returned.
-     * @param encoding The name of the encoding used in the file.
      * @param config The parser config for the file type being parsed.
      * @return The set of paths specified in the files dependency statements.
      */
-    private parseFile(file: util.File, encoding: string, config: DependencyParserConfig): string[]
+    private parseFile(file: util.File, config: DependencyParserConfig): string[]
     {
         // Read the file contents as a string.
-        const fileContents = file.contents.toString(encoding);
+        const fileContents = file.contents.toString();
 
         // Iteratively reduce the file contents to a set of dependency references.
 
@@ -165,11 +165,11 @@ export default class DependencyParser implements IDependencyParser
     }
 
     /**
-     * Applies the specified RegExp or function to each of the specified texts, aggregating all the captured 
+     * Applies the specified RegExp or function to each of the specified texts, aggregating all the captured
      * values into a single list.
      * @param texts The texts against which the RegExp or function should be executed.
-     * @param regExpOrFunc The RegExp or function to be executed. If the parameter is a RegExp, it must have 
-     * a single capture group representing the string to be matched. If the parameter is a function, it must 
+     * @param regExpOrFunc The RegExp or function to be executed. If the parameter is a RegExp, it must have
+     * a single capture group representing the string to be matched. If the parameter is a function, it must
      * accept a string and return an array of matched strings.
      * @return An array containing all the matches found in all the texts.
      */
@@ -252,7 +252,7 @@ export default class DependencyParser implements IDependencyParser
 
         return variants;
     }
-    
+
     /**
      * Applies the alternate base paths in the specified config to the specified paths, returning the resulting set of path variants.
      * @param dependencyPaths The dependency paths for which variants should be returned.

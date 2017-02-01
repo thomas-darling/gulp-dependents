@@ -6,14 +6,14 @@ import IDependencyParser from "./IDependencyParser";
 
 /**
  * Represents a dependency tracker, which tracks the files that pass through and the dependencies between them.
- * It assumes that it will be used in such a way, that after the instance has been created, the first sequence of 
- * files passed to the tracker represent all the files between which dependencies may exist. This is nessesary to 
+ * It assumes that it will be used in such a way, that after the instance has been created, the first sequence of
+ * files passed to the tracker represent all the files between which dependencies may exist. This is nessesary to
  * set up the initial dependency map, such that when a dependency is changed, we knows which files depend on it.
  *
  * A typical Gulp setup satisfying the above requirement involves two tasks:
  * - A 'build' task, which pipes all files through first the 'gulp-cached' plugin, and then through this plugin.
  * - A 'watch' task, which watches the files, and invokes the 'build' task whenever a file changes.
- * This works because the 'gulp-cached' plugin will pass through, and cache, only the files that are not already 
+ * This works because the 'gulp-cached' plugin will pass through, and cache, only the files that are not already
  * in the cache or which have changed compared to the cached version. Alternatively, you may use the 'gulp-watch'
  * plugin, which creates an infinite stream that initially pass through all files, and after that, only changes.
  */
@@ -37,7 +37,7 @@ export default class DependencyTracker implements IDependencyTracker
     private trackedFilePaths = {};
 
     /**
-     * Creates a new instance of the type. 
+     * Creates a new instance of the type.
      * @param dependencyParser The parser used to extract dependency file paths from files.
      */
     constructor(dependencyParser: IDependencyParser)
@@ -99,7 +99,7 @@ export default class DependencyTracker implements IDependencyTracker
             // Add the normalized dependency file paths to the map.
             for (let dependencyFilePath of dependencyFilePaths.map(p => path.normalize(p)))
             {
-                // If the dependency file is missing in the file system, ensure its path is marked 
+                // If the dependency file is missing in the file system, ensure its path is marked
                 // as tracked, so we know to process its dependents if it is added later.
                 if (!this.trackedFilePaths[dependencyFilePath] && !fs.existsSync(dependencyFilePath))
                 {
@@ -117,20 +117,20 @@ export default class DependencyTracker implements IDependencyTracker
             }
         }
 
-        // If this is the first time we encounter the file, and it isn't tracked as a missing dependency, then 
+        // If this is the first time we encounter the file, and it isn't tracked as a missing dependency, then
         // it is assumed that we're still in the initial run, where all files should already be in the stream.
         // We therefore should not add dependents, as they will be processed anyway.
         if (!shouldReturnDependents)
         {
             return null;
         }
-        
+
         // Recursively find the file paths for all files that depend on the specified file.
         // If a dependent file no longer exists, it will not be included, and will be removed from the map.
         const dependentFilePaths = this.getDependentFilePaths(filePath, true, true);
 
         // Return the set of files that depend on the current file.
-        // We return those dependents even if the current file itself does not exist; all we do here is to find 
+        // We return those dependents even if the current file itself does not exist; all we do here is to find
         // the dependents, and if one is missing, it is up to the actual build tool to report that as an error.
         return dependentFilePaths.map(dependentFilePath =>
         {
@@ -145,7 +145,7 @@ export default class DependencyTracker implements IDependencyTracker
 
     /**
      * Logs the state of the dependency map to the console.
-     * Note that this lists only dependencies and their dependents; files without dependencies 
+     * Note that this lists only dependencies and their dependents; files without dependencies
      * are not listed, except as dependents, even though they are in fact tracked.
      * @param basePath The absolute base path, or null to log absolute file paths.
      */
@@ -282,7 +282,7 @@ export default class DependencyTracker implements IDependencyTracker
                         for (let dependencyFilePath of Object.keys(dependencyMap))
                         {
                             delete dependencyMap[dependencyFilePath][dependentFilePath];
-                            
+
                             // If the dependency has no dependents left, remove it from the map.
                             if (!Object.keys(dependencyMap[dependencyFilePath]).length)
                             {

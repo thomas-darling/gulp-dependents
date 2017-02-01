@@ -19,7 +19,9 @@
     "type": "git",
     "url": "https://github.com/thomas-darling/gulp-dependents.git"
   },
-  "dependencies": { },
+  "dependencies": {
+    "gulp": "git://github.com/gulpjs/gulp.git#4.0"
+  },
   "devDependencies": {
     "gulp": "git://github.com/gulpjs/gulp.git#4.0",
     "gulp-debug": "2.1.2"

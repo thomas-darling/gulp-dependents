@@ -1,0 +1,16 @@
+## Ignore source files
+
+/src/
+
+## Ignore example files
+
+/example/
+
+## Ignore config files
+
+/.git/
+/.vscode/
+.gitattributes
+.gitignore
+.npmignore
+tsconfig.json
