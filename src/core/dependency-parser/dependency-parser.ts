@@ -3,7 +3,7 @@ import * as util from "gulp-util";
 /**
  * Represents a parser that extracts dependency file paths from a file.
  */
-interface IDependencyParser
+export interface IDependencyParser
 {
     /**
      * Parses the specified file, returning the set dependency file paths on which it depends.
@@ -13,6 +13,3 @@ interface IDependencyParser
      */
     getDependencyFilePaths(file: util.File, encoding: string): string[];
 }
-
-// TODO: Workaround for TypeScript limitation. See: https://github.com/Microsoft/TypeScript/issues/3914
-export default IDependencyParser;

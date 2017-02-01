@@ -1,8 +1,8 @@
 import * as util from "gulp-util";
 import * as path from "path";
 import * as fs from "fs";
-import IDependencyParser from "./IDependencyParser";
-import DependencyParserConfig from "./DependencyParserConfig";
+import {IDependencyParser} from "../dependency-parser";
+import {IDependencyParserConfig} from "../dependency-parser-config";
 
 /**
  * Represents the default configuration for the dependency tracker, specifying
@@ -63,7 +63,7 @@ export const defaultConfig =
 /**
  * Represents a parser that extracts dependency file paths from a file.
  */
-export default class DependencyParser implements IDependencyParser
+export class DependencyParser implements IDependencyParser
 {
     /**
      * The configuration describing how files should be parsed.
@@ -92,7 +92,7 @@ export default class DependencyParser implements IDependencyParser
     public getDependencyFilePaths(file: util.File, encoding: string): string[]
     {
         // Get the configuration for the file type.
-        const config = this.config[path.extname(file.path).toLowerCase()] as DependencyParserConfig;
+        const config = this.config[path.extname(file.path).toLowerCase()] as IDependencyParserConfig;
 
         // Ignore file types for which we have no config.
         if (!config)
@@ -147,7 +147,7 @@ export default class DependencyParser implements IDependencyParser
      * @param config The parser config for the file type being parsed.
      * @return The set of paths specified in the files dependency statements.
      */
-    private parseFile(file: util.File, config: DependencyParserConfig): string[]
+    private parseFile(file: util.File, config: IDependencyParserConfig): string[]
     {
         // Read the file contents as a string.
         const fileContents = file.contents.toString();
@@ -215,7 +215,7 @@ export default class DependencyParser implements IDependencyParser
      * @param config The parser config for the file type being parsed.
      * @return A list of prefixed path variants.
      */
-    private getPrefixedPathVariants(dependencyPaths: string[], config: DependencyParserConfig): string[]
+    private getPrefixedPathVariants(dependencyPaths: string[], config: IDependencyParserConfig): string[]
     {
         let variants: string[] = [];
 
@@ -237,7 +237,7 @@ export default class DependencyParser implements IDependencyParser
      * @param config The parser config for the file type being parsed.
      * @return A list of path variants, with default file names appended to each folder path.
      */
-    private getPostfixedPathVariants(dependencyPaths: string[], config: DependencyParserConfig): string[]
+    private getPostfixedPathVariants(dependencyPaths: string[], config: IDependencyParserConfig): string[]
     {
         let variants: string[] = [];
 
@@ -259,7 +259,7 @@ export default class DependencyParser implements IDependencyParser
      * @param config The parser config for the file type being parsed.
      * @return A list of postfixed path variants.
      */
-    private getBasePathVariants(dependencyPaths: string[], config: DependencyParserConfig): string[]
+    private getBasePathVariants(dependencyPaths: string[], config: IDependencyParserConfig): string[]
     {
         let variants: string[] = [];
 

@@ -1,8 +1,8 @@
 ﻿import * as util from "gulp-util";
 import * as path from "path";
 import * as fs from "fs";
-import IDependencyTracker from "./IDependencyTracker";
-import IDependencyParser from "./IDependencyParser";
+import {IDependencyTracker} from "../dependency-tracker";
+import {IDependencyParser} from "../../dependency-parser/dependency-parser";
 
 /**
  * Represents a dependency tracker, which tracks the files that pass through and the dependencies between them.
@@ -17,7 +17,7 @@ import IDependencyParser from "./IDependencyParser";
  * in the cache or which have changed compared to the cached version. Alternatively, you may use the 'gulp-watch'
  * plugin, which creates an infinite stream that initially pass through all files, and after that, only changes.
  */
-export default class DependencyTracker implements IDependencyTracker
+export class DependencyTracker implements IDependencyTracker
 {
     /**
      * The parser used to extract dependency file paths from files.

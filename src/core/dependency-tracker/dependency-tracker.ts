@@ -3,7 +3,7 @@ import * as util from "gulp-util";
 /**
  * Represents a dependency tracker, which tracks the files that pass through and the dependencies between them.
  */
-interface IDependencyTracker
+export interface IDependencyTracker
 {
     /**
      * Updates the dependency map, returning the set of files that depend on the specified file.
@@ -22,11 +22,8 @@ interface IDependencyTracker
 
     /**
      * Logs the state of the dependency map to the console.
-     * Note that this lists only dependencies and their dependents; files without dependencies 
+     * Note that this lists only dependencies and their dependents; files without dependencies
      * are not listed, except as dependents, even though they are in fact tracked.
      */
     logDependencyMap(): void;
 }
-
-// TODO: Workaround for TypeScript limitation. See: https://github.com/Microsoft/TypeScript/issues/3914
-export default IDependencyTracker;
