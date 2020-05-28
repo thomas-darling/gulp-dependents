@@ -1,4 +1,4 @@
-import * as util from "gulp-util";
+import File from "vinyl";
 import * as path from "path";
 import * as fs from "fs";
 import {IDependencyParser} from "../dependency-parser";
@@ -89,7 +89,7 @@ export class DependencyParser implements IDependencyParser
      * @param encoding The name of the encoding used in the file.
      * @return The set of file paths on which the file depends.
      */
-    public getDependencyFilePaths(file: util.File, encoding: string): string[]
+    public getDependencyFilePaths(file: File, encoding: string): string[]
     {
         // Get the configuration for the file type.
         const config = this.config[path.extname(file.path).toLowerCase()] as IDependencyParserConfig;
@@ -147,7 +147,7 @@ export class DependencyParser implements IDependencyParser
      * @param config The parser config for the file type being parsed.
      * @return The set of paths specified in the files dependency statements.
      */
-    private parseFile(file: util.File, config: IDependencyParserConfig): string[]
+    private parseFile(file: File, config: IDependencyParserConfig): string[]
     {
         // Read the file contents as a string.
         const fileContents = file.contents.toString();

@@ -1,4 +1,5 @@
-﻿import * as util from "gulp-util";
+﻿import File from "vinyl";
+import log from "fancy-log";
 import * as path from "path";
 import * as fs from "fs";
 import {IDependencyTracker} from "../dependency-tracker";
@@ -56,7 +57,7 @@ export class DependencyTracker implements IDependencyTracker
      * @param encoding The name of the encoding used in the file.
      * @return The files dependend files, or null, if no dependents should be added to the stream.
      */
-    public updateAndGetDependents(file: util.File, encoding: string): util.File[]
+    public updateAndGetDependents(file: File, encoding: string): File[]
     {
         if (file == null)
         {
@@ -134,7 +135,7 @@ export class DependencyTracker implements IDependencyTracker
         // the dependents, and if one is missing, it is up to the actual build tool to report that as an error.
         return dependentFilePaths.map(dependentFilePath =>
         {
-            return new util.File({
+            return new File({
                 cwd: file.cwd,
                 base: file.base,
                 path: dependentFilePath,
@@ -174,7 +175,7 @@ export class DependencyTracker implements IDependencyTracker
             }
         }
 
-        util.log(text);
+        log(text);
     }
 
     /**
@@ -221,7 +222,7 @@ export class DependencyTracker implements IDependencyTracker
             text += "\n  └─ Unknown: File is not tracked.";
         }
 
-        util.log(text);
+        log(text);
     }
 
     /**

@@ -13,7 +13,8 @@
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "strictNullChecks": false,
-    "outDir": "lib"
+    "outDir": "lib",
+    "esModuleInterop": true
   },
   "exclude": [
       ".vscode",

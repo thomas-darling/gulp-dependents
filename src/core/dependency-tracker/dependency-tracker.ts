@@ -1,4 +1,4 @@
-import * as util from "gulp-util";
+import File from "vinyl";
 
 /**
  * Represents a dependency tracker, which tracks the files that pass through and the dependencies between them.
@@ -11,7 +11,7 @@ export interface IDependencyTracker
      * @param encoding The name of the encoding used in the file.
      * @return The files dependend files, or null, if no dependents should be added to the stream.
      */
-    updateAndGetDependents(file: util.File, encoding: string): util.File[];
+    updateAndGetDependents(file: File, encoding: string): File[];
 
     /**
      * Logs the specified dependency and its dependents to the console.

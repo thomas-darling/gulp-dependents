@@ -1,4 +1,4 @@
-import * as util from "gulp-util";
+import File from "vinyl";
 import * as path from "path";
 import * as through from "through2";
 import {IPluginConfig} from "./plugin-config";
@@ -29,7 +29,7 @@ export function plugin(parserConfig?: {}, pluginConfig?: IPluginConfig): NodeJS.
     }
 
     // Return the stream transform.
-    return through.obj(function (file: util.File, encoding: string, callback: (err?: any, data?: any) => void)
+    return through.obj(function (file: File, encoding: string, callback: (err?: any, data?: any) => void)
     {
         // Get the files that depend on the current file.
         let dependentFiles = dependencyTracker.updateAndGetDependents(file, encoding);
