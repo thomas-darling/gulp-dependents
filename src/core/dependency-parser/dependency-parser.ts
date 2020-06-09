@@ -1,4 +1,4 @@
-import * as util from "gulp-util";
+import File from "vinyl";
 
 /**
  * Represents a parser that extracts dependency file paths from a file.
@@ -11,5 +11,5 @@ export interface IDependencyParser
      * @param encoding The name of the encoding used in the file.
      * @return The set of file paths on which the file depends.
      */
-    getDependencyFilePaths(file: util.File, encoding: string): string[];
+    getDependencyFilePaths(file: File, encoding: string): string[];
 }
