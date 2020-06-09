@@ -1,5 +1,9 @@
 ﻿gulp-dependents
 ===============
+
+[![Version](https://img.shields.io/npm/v/gulp-dependents.svg)](https://www.npmjs.org/package/gulp-dependents)
+[![Downloads](https://img.shields.io/npm/dm/gulp-dependents.svg)](https://www.npmjs.com/package/gulp-dependents)
+
 Gulp plugin that tracks dependencies between files and adds any files that depend
 on the files currently in the stream, thus enabling incremental build of `pcss`,
 `less`, `scss` and `sass` files, with extensibility points to support other file
@@ -51,20 +55,20 @@ gulp.task('build', function() {
 
 ```
 
-Note that `gulp-cached` and `gulp-changed` have different behavior - `gulp-changed`
-will *not* nessesarily pass all files through on first run. Instead, it compares the
-timestamps of the source and destination files, and only pass through those that appear
-to be different. This means, that you must clean your output folder every time your
-watch task starts, as this plugin needs to process all files at least once, in order to
-determine the initial dependency tree - it won't know a file depends on another,
-until it has parsed its dependency statements at least once.
+Please note that although they serve a similar pourpose, `gulp-cached` and `gulp-changed`
+have different behavior - `gulp-changed` will *not* nessesarily pass all files through on first run.
+Instead, it compares the timestamps of the source and destination files, and only pass through those
+that appear to be different. This means, that if you want to use `gulp-changed` instead of `gulp-cached`,
+you must clean your output folder every time your watch task starts, as this plugin needs to process all
+files at least once, in order to determine the initial dependency tree - it won't know a file depends on
+another, until it has parsed its dependency statements at least once.
 
 ## Support and limitations
 Out of the box, this plugin supports `pcss`, `less`, `scss` and `sass` files, including
 things like comma-separated path lists, import statements spanning multiple lines
 and `url(...)` paths. For `sass`, which is the indent-based variant of the `scss`
-syntax, support is limited to single-line statements. Also note, that due to the
-way tracking is implemented, it is currently not be possible to support dependency
+syntax, support is limited to single-line import statements. Also note, that due to the
+way tracking is implemented, it is currently not possible to support dependency
 statements with glob patterns, referencing e.g. all files in a folder.
 
 ## Configuration
@@ -78,7 +82,7 @@ The parser will apply each `RegExp` or `function` in the `parserSteps` array in
 sequence, such that the first receives all the file content and may e.g. extract
 whole dependency statements, and the second one may then extract the paths from
 those statements. This design enables parsing of complex statements that e.g.
-list multiple, comma-separated file paths. It also enables the use of externa
+list multiple, comma-separated file paths. It also enables the use of external
 parsers, by specifying a function, which simply invokes the external parser to
 get the dependency paths.
 
